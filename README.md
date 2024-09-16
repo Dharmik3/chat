@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+# Chat Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Real-Time Chat Application developed using React, Tailwind CSS, and Firebase. It supports both one-to-one chats and group chats with features like user authentication, real-time messaging, and group creation. The application is designed to be responsive and provides a modern user interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User Authentication: Sign up and login using PhoneAuth (Mobile Number Authentication) with Firebase.
+- One-to-One Chat: Real-time messaging between two users.
+- Group Chat: Real-time group chat with the ability to create and join groups.
+- Real-time Updates: Messages and group updates are stored in Firebase Realtime Database, ensuring instant updates across users.
+- Responsive Design: Built with Tailwind CSS, the app adapts seamlessly to both mobile and desktop screens.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Frontend: React, TypeScript, Tailwind CSS
+- Authentication: Firebase PhoneAuth Provider
+- Database: Firebase Realtime Database (for storing messages)
+- Cloud Storage: Firebase Firestore (for storing user data)
+- Icons: React Icons
 
-- Configure the top-level `parserOptions` property like this:
+## System Design
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Steps to Run
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/dharmik3/chat.git
+
+cd chat
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```bash
+yarn add
+```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+3. Configure firebase project
+
+- Replace in services/firebaseCongig.ts
+
+```bash
+firebaseConfig={} object with your setuped project on firebase
+```
+
+4. Create .env at root level of your project and Add
+
+```
+VITE_API_KEY=<Your Firebase API KEY>
+```
+
+5. Run
+
+```bash
+yarn run dev
 ```
