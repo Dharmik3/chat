@@ -19,6 +19,9 @@ This is a Real-Time Chat Application developed using React, Tailwind CSS, and Fi
 - Icons: React Icons
 
 ## System Design
+![System Design](./public/images/signup.png)
+![Login Screen](./public/images/login.png)
+![Chat Screen](./public/images/chat.png)
 
 ## Steps to Run
 
