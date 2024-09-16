@@ -10,7 +10,7 @@ import { firestore as firestoreDB } from "../services/firebaseConfig";
 import { Contact, UseContactsResult } from "../types";
 
 // hooks for fetching contacts details from firestore -> users
-export const useContacts = (): UseContactsResult => {
+export const useContacts = (userId: string): UseContactsResult => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
@@ -25,7 +25,10 @@ export const useContacts = (): UseContactsResult => {
           id: doc.id,
           ...doc.data(),
         })) as Contact[];
-        setContacts(fetchedContacts);
+        const filteredContacts = fetchedContacts.filter(
+          (contact) => contact?.id != userId
+        );
+        setContacts(filteredContacts);
         setLoading(false);
       },
       (error) => {

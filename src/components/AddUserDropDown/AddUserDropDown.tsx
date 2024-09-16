@@ -4,6 +4,7 @@ import { onSnapshot, doc } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
 import { firestore as firestoreDB } from "../../services/firebaseConfig";
 import { useContacts } from "../../hooks/useContacts";
+import { useAuth } from "../../context/AuthContext";
 
 interface AddUserDropdownProps {
   groupId: string;
@@ -14,7 +15,8 @@ export const AddUserDropDown: React.FC<AddUserDropdownProps> = ({
   groupId,
   onUserAdd,
 }) => {
-  const { contacts: users } = useContacts();
+  const { user } = useAuth();
+  const { contacts: users } = useContacts(user?.uid as string);
   const [selectedUsers, setSelectedUsers] = useState<Set<string>>(new Set());
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

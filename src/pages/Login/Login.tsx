@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { IoMdLock } from "react-icons/io";
-import bcrypt from "bcryptjs";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import bcrypt from "bcryptjs";
 import { toast } from "react-toastify";
 
 import { checkUserExists } from "../../services/firebase";
@@ -13,6 +14,7 @@ export const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useAuth();
 
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ export const Login = () => {
     // validation
     if (!phoneNumber.trim() || !password.trim()) {
       toast("Fields are required");
+      return;
     }
 
     try {
@@ -104,12 +107,23 @@ export const Login = () => {
       </label>
       <div className="relative mt-2">
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pr-3 pl-4 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 "
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
         />
+        <button
+          type="button"
+          className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? (
+            <AiOutlineEyeInvisible size={20} />
+          ) : (
+            <AiOutlineEye size={20} />
+          )}
+        </button>
       </div>
 
       {/* Button with spinner */}

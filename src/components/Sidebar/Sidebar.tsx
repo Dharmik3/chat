@@ -30,7 +30,9 @@ export const Sidebar = (props: SidebarType) => {
 
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { contacts, loading: isContactsLoading } = useContacts();
+  const { contacts, loading: isContactsLoading } = useContacts(
+    user?.uid as string
+  );
   const { groups, loading: isGroupsLoading } = useGroups(user?.uid);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // state for toggling create group modal
   const [searchTerm, setSearchTerm] = useState(""); // search bar string state

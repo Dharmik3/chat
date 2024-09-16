@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { auth, firestore } from "../../services/firebaseConfig";
 import { checkUserExists } from "../../services/firebase";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export const Signup = () => {
   const [name, setName] = useState("");
@@ -22,6 +23,7 @@ export const Signup = () => {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -93,14 +95,15 @@ export const Signup = () => {
         const uid = auth.currentUser?.uid;
         if (uid) {
           // Store user details in Firestore with name, phone number and hashed password
-          await setDoc(doc(firestore, "users", uid), {
+          const user = await setDoc(doc(firestore, "users", uid), {
             name: name,
             phoneNumber,
             password: hashedPassword, // Store hashed password
             createdAt: new Date().toISOString(),
           });
+          console.log({ user });
           toast.success("User signed up successfully.");
-          navigate("/");
+          navigate("/login");
         } else {
           console.error("No authenticated user found after OTP verification");
           toast.error("No authenticated user found after OTP verification.");
@@ -203,20 +206,31 @@ export const Signup = () => {
         {isOtpVerified && (
           <>
             <label
-              htmlFor="password-input"
+              htmlFor="phone-input"
               className="mb-2 text-sm font-medium text-gray-900"
             >
               Password
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pr-3 pl-4 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 mb-4"
-              placeholder="Password"
-              required
-              autoComplete="current-password"
-            />
+            <div className="relative mt-2">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pr-3 pl-4 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 "
+                placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+              <button
+                type="button"
+                className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <AiOutlineEyeInvisible size={20} />
+                ) : (
+                  <AiOutlineEye size={20} />
+                )}
+              </button>
+            </div>
             <button
               type="submit"
               className="text-white w-full bg-blue-700 hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5 mb-2 mt-8"
