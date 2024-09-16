@@ -1,4 +1,3 @@
-import React from "react";
 import { useRoutes } from "react-router-dom";
 import { Chat, Login, Signup } from "../pages";
 import { ProtectedRoute } from "./ProtectedRoute";

@@ -1,4 +1,3 @@
-import React from "react";
 import { GroupMessage } from "../../types";
 
 interface GroupMessagesProps {

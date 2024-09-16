@@ -5,7 +5,7 @@ import { getDatabase } from "firebase/database";
 
 // firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDuD6wpqQf_jKU-ve_irsXftytFKPzVZg4",
+  apiKey: import.meta.env.VITE_API_KEY,
   authDomain: "chat-app-6823e.firebaseapp.com",
   projectId: "chat-app-6823e",
   storageBucket: "chat-app-6823e.appspot.com",
