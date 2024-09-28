@@ -17,6 +17,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 const realtimeDb = getDatabase(app);
-auth.settings.appVerificationDisabledForTesting = true;
+auth.settings.appVerificationDisabledForTesting = false;
 
 export { auth, firestore, realtimeDb };

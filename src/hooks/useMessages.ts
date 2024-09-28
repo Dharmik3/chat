@@ -1,4 +1,3 @@
-// src/hooks/useMessages.ts
 import { useEffect, useState } from "react";
 import { ref, onValue, push } from "firebase/database";
 import { realtimeDb } from "../services/firebaseConfig";

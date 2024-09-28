@@ -1,4 +1,3 @@
-// src/hooks/useContacts.ts
 import { useEffect, useState } from "react";
 import {
   collection,

@@ -1,4 +1,3 @@
-// useGroupMessages.ts
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { firestore as firestoreDB } from "../services/firebaseConfig";

@@ -1,4 +1,3 @@
-// src/hooks/useGroups.ts
 import { useEffect, useState } from "react";
 import {
   collection,
